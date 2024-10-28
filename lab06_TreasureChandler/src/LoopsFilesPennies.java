@@ -47,7 +47,7 @@ public class LoopsFilesPennies {
         scan.nextLine();
 
         /*
-         * this while loop simply validates the required bounds for the input.
+         * this do-while loop simply validates the required bounds for the input.
          * the loop stops once the program recieves an acceptable input
          */
         while (!((days >= 21) && (days <= 30))) {
@@ -55,9 +55,10 @@ public class LoopsFilesPennies {
              * asks user to enter a correct value from 21-30, and assign
              * the value to the "days" variable
              */
-            System.out.println(String.format("\nYour entered work days, %d " +
+            System.out.println(String.format("\nYour entered work days, %d, " +
                                                 "is not admissible, since it is " +
-                                                "not within the required range.",
+                                                "not within the required range." +
+                                                "\nPlease try again.",
                                                 days));
             days = scan.nextInt();
 
@@ -105,14 +106,14 @@ public class LoopsFilesPennies {
         wages = pennies / 100.0;
 
         // display the dollar total in the console
-        System.out.printf("For %d days worked, the CS major earned $%.2f, " + 
-                            "and the XX major earned $,.2f", days, pennies,
-                            payRateOptionI);
+        System.out.printf("For %d days worked, the CS major earned $%,5.2f, " + 
+                            "and the XX major earned $%,2.2f", days, wages,
+                            days * payRateOptionI);
 
         // // declare the file name (such as "wages.txt" for writing in the file)
         // String fileName;
 
-        // // get the actual file name
+        //et the actual file name
         // System.out.println("Enter the file name, such as \"wages.txt\":");
         // fileName = scan.nextLine();
 
