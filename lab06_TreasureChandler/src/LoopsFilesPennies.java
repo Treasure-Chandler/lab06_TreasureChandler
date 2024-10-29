@@ -81,7 +81,7 @@ public class LoopsFilesPennies {
         }
 
         /*
-         * this simple print statement it outside of the for loop in order to
+         * this simple print statement is outside of the for loop in order to
          * print these strings in the console once
          */
         System.out.println("Pay Rate for Option II vs Option I:\n" +
