@@ -1,11 +1,12 @@
-package lab06_TreasureChandler.src;
-
 /*
 * Treasure Chandler
 * CS 16000-01 02/03, Fall Semester 2024
 * Lab 6
 *
 */
+
+package lab06_TreasureChandler.src;
+
 import java.util.Scanner;   // needed for the scanner class
 import java.io.*;           // needed for the java.io class
 
@@ -14,7 +15,7 @@ public class LoopsFilesPennies {
      * 
      * @param args      entered values
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException{
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         // variables declaration
         int pennies = 0, days, dayWhenOptionIPayLessOptionII = 0;
         double payRateOptionI, wages = 0, difference;
@@ -28,7 +29,7 @@ public class LoopsFilesPennies {
          * solicits to enter the pay rate of the first option (which is the $
          * per day)
          */
-        System.out.println("Enter the pay rate for option I in $ per day " +
+        System.out.println("Enter the pay rate for option I in $ per day, " +
                             "for example, \"1000.0\"");
         payRateOptionI = scan.nextDouble();
 
@@ -106,16 +107,34 @@ public class LoopsFilesPennies {
         wages = pennies / 100.0;
 
         // display the dollar total in the console
-        System.out.printf("For %d days worked, the CS major earned $%,5.2f, " + 
+        System.out.printf("For %d days worked, the CS major earned $%,.2f, " + 
                             "and the XX major earned $%,2.2f", days, wages,
                             days * payRateOptionI);
 
-        // // declare the file name (such as "wages.txt" for writing in the file)
+        // problem 4:
+        /*
+         * My Experience:
+         * 
+         * When it comes to analyzing the table between the pay rate options
+         * for the CS major and the XX major, it is clearly shown that the choice
+         * the CS major made was justifiable. If the CS major chose to double their
+         * pay rate each day, not much progress is shown. The CS major's pay rate
+         * appears to be less than the XX major's, until up to day 15. On day 14, the
+         * CS major's pay rate was at $8,192. However, due to the aformentioned plan,
+         * that pay rate doubled the next day to $16,384, which is greater than the XX
+         * major's pay rate, only at $15,000. From this day forward, the CS major's pay
+         * rate will always be greater than the XX major's, further supporting the fact
+         * that the choice made by the CS major was indeed justifiable.
+         */
+
+        // declare the file name (such as "wages.txt" for writing in the file)
         // String fileName;
 
-        //et the actual file name
+        // get the actual file name
         // System.out.println("Enter the file name, such as \"wages.txt\":");
         // fileName = scan.nextLine();
+
+        scan.close();
 
     } // end of main()
 
