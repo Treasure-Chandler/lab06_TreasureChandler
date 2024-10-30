@@ -27,13 +27,6 @@ public class LoopsFilesPennies {
         double payRateOptionI, wages = 0, difference;
         boolean optionIPayLessOptionII = false;
 
-        // problem 7/12:
-        /*
-         * creates a PrintWriter object to write to the wages.txt file, along with
-         * ensuring that the file can be appended
-         */
-        PrintWriter wagesWriter = new PrintWriter(new FileWriter("wages.txt", true));
-
         // problem 2:
         // instantiates a Scanner object to read from the console
         Scanner scan = new Scanner(System.in);
@@ -118,14 +111,6 @@ public class LoopsFilesPennies {
 
             System.out.printf("Day %2d: \t%,15d\t\t%,12.2f\n", i, pennies,
                                 i * payRateOptionI);
-
-            // problem 15:
-            /*
-             * along with printing the table in the console, the same table will
-             * be printed in the wages.txt file
-             */
-            wagesWriter.printf("Day %2d: \t%,15d\t\t%,12.2f\n", i, pennies,
-                                i * payRateOptionI);
         }
 
         /*
@@ -136,10 +121,6 @@ public class LoopsFilesPennies {
 
         // display the dollar total in the console
         System.out.printf("\nFor %d days worked, the CS major earned $%,.2f, " + 
-                            "and the XX major earned $%,2.2f", days, wages,
-                            days * payRateOptionI);
-
-        wagesWriter.printf("\nFor %d days worked, the CS major earned $%,.2f, " +
                             "and the XX major earned $%,2.2f", days, wages,
                             days * payRateOptionI);
 
@@ -159,11 +140,102 @@ public class LoopsFilesPennies {
                         "supporting the fact that the choice made by the CS\n" +
                         "major was indeed justifiable.\n";
 
-        // problem 8:
-        // writes the "comment" variable to the file, then closes it
-        wagesWriter.println(comment);
 
-        wagesWriter.close();
+        // problems 7-12:
+        // prompts user to enter the file name for a future wages.txt file
+        System.out.println("\n\nEnter the file name for the data to be copied to," +
+                            "such as \"wages.txt\":");
+        String fileNameInput = scan.nextLine();
+
+        File file0 = new File(fileNameInput);
+
+        // check if "file0" exists
+        if (!file0.exists()) {
+            /*
+             * if not, then a new wages.txt file will be created, and this same file
+             * will be allowed to be appended in the future
+             */
+            FileWriter fWriter = new FileWriter(file0, true);
+            PrintWriter wagesFile = new PrintWriter(fWriter);
+            wagesFile.println("My Comments on the Exponential Penny Pay Project\n");
+
+            // close the file in order for the title to appear in it
+            wagesFile.close();
+        }
+
+        /*
+         * open the file referenced by the file name, then a Scanner is created to
+         * read the file referenced by the file name
+         */
+        File wagesWriter = new File(fileNameInput);
+        Scanner inputFile = new Scanner(wagesWriter);
+
+        // check if "inputFile" has tokens in its input
+        if (!inputFile.hasNext()) {
+            /*
+             * if not, then 
+             */
+            FileWriter fWriter = new FileWriter(wagesWriter, true);
+            PrintWriter wagesFile = new PrintWriter(fWriter);
+            wagesFile.println("My Comments on the Exponential Penny Pay Project\n");
+
+            wagesFile.close();
+        }
+
+        inputFile.close();
+
+        FileWriter fWriter = new FileWriter(fileNameInput, true);
+        PrintWriter wagesFile = new PrintWriter(fWriter);
+
+        wagesFile.println("Pay Rate for Option II vs Option I:\n" +
+                            "Days Worked Option II         Cents         Option I $");
+
+        // this for loop iterates the days (how many days the user inputted)
+        for (int i = 1; i <= days; ++i) {
+            /*
+             * for the first day, pennies are assigned the value of 1.
+             * for each subsequent day, the amount of pennies double
+             */
+            if (i == 1) {
+                pennies = 1;
+            } else {
+                /*
+                 * after day 1, the pennies will always double until the loop
+                 * stops
+                 */
+                pennies = pennies * 2;
+            }
+
+            if (!optionIPayLessOptionII) {
+                difference = pennies / 100.0 - days * payRateOptionI;
+
+                if (difference >= 0) {
+                    /*
+                     * determines the day for the first time the pay of
+                     * option I is less than the pay of option II
+                     */
+                    dayWhenOptionIPayLessOptionII = i;
+                    optionIPayLessOptionII = true;
+                }
+            }
+
+            wagesFile.printf("Day %2d: \t%,15d\t\t%,12.2f\n", i, pennies,
+                                i * payRateOptionI);
+        }
+        /*
+         * once the iteration process is finished, assign the variable "wages"
+         * to the dollar value that corresponds to the "pennies" value
+         */
+        wages = pennies / 100.0;
+
+        // display the dollar total in the file
+        wagesFile.printf("\nFor %d days worked, the CS major earned $%,.2f, " + 
+                            "and the XX major earned $%,2.2f", days, wages,
+                            days * payRateOptionI);
+        wagesFile.println(comment);
+
+
+        wagesFile.close();
         scan.close();
         
     } // end of main()
