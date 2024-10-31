@@ -138,12 +138,12 @@ public class LoopsFilesPennies {
                         "From this day forward, the CS major's pay rate will\n" +
                         "always be greater than the XX major's, further\n" +
                         "supporting the fact that the choice made by the CS\n" +
-                        "major was indeed justifiable.\n";
+                        "major was indeed justifiable.";
 
 
         // problems 7-12:
         // prompts user to enter the file name for a future wages.txt file
-        System.out.println("\n\nEnter the file name for the data to be copied to," +
+        System.out.println("\n\nEnter the file name for the data to be copied to, " +
                             "such as \"wages.txt\":");
         String fileNameInput = scan.nextLine();
 
@@ -165,7 +165,7 @@ public class LoopsFilesPennies {
 
         /*
          * open the file referenced by the file name, then a Scanner is created to
-         * read the file referenced by the file name
+         * read that same file
          */
         File wagesWriter = new File(fileNameInput);
         Scanner inputFile = new Scanner(wagesWriter);
@@ -173,24 +173,36 @@ public class LoopsFilesPennies {
         // check if "inputFile" has tokens in its input
         if (!inputFile.hasNext()) {
             /*
-             * if not, then 
+             * (has the same process when you are checking for if file0 exists)
+             * if not, then a new wages.txt file will be created, and this same file
+             * will be allowed to be appended in the future
              */
             FileWriter fWriter = new FileWriter(wagesWriter, true);
             PrintWriter wagesFile = new PrintWriter(fWriter);
             wagesFile.println("My Comments on the Exponential Penny Pay Project\n");
 
+            // close the file in order for tht title to appear in it
             wagesFile.close();
         }
 
         inputFile.close();
 
+        /*
+         * reinstantiating the PrintWriter object in order to ensure the wages.txt
+         * file can be appended
+         */
         FileWriter fWriter = new FileWriter(fileNameInput, true);
         PrintWriter wagesFile = new PrintWriter(fWriter);
 
         wagesFile.println("Pay Rate for Option II vs Option I:\n" +
-                            "Days Worked Option II         Cents         Option I $");
+                            "Days Worked Option II     Cents     Option I $");
 
-        // this for loop iterates the days (how many days the user inputted)
+        /*
+         * remaking the for-loop with some minor changes; those changes would be for
+         * printing the lines in the file instead of the console
+         * 
+         * this for loop iterates the days (how many days the user inputted)
+         */
         for (int i = 1; i <= days; ++i) {
             /*
              * for the first day, pennies are assigned the value of 1.
